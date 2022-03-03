@@ -237,25 +237,26 @@
     <!-- end why -->
     <!-- contact -->
     <div id="contact" class="contact">
-      <div class="container">
+      <div class="container"> 
         <div class="row">
           <div class="col-md-6 offset-md-3">
-            <form class="main_form">
+            <div class="alert alert-success alert-dismissible fade show d-none my-alert" role="alert">
+              <strong>Terima kasih!</strong> Pesan anda sudah kami terima.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <form class="main_form" name='muhammadparif_Contact_FORM'>
               <div class="row">
                 <div class="col-sm-12">
                   <input class="contactus" placeholder="Nama" type="text" name="Name" />
                 </div>
                 <div class="col-sm-12">
-                  <input class="contactus" placeholder="Email" type="text" name=" Email" />
+                  <input class="contactus" placeholder="Email" type="text" name=" Email"  />
                 </div>
                 <div class="col-sm-12">
-                  <input class="contactus" placeholder="Nomor Telepon" type="text" name="Phone" />
+                  <textarea class="textarea" placeholder="Pesan" type="text" name="Message" ></textarea>
                 </div>
                 <div class="col-sm-12">
-                  <textarea class="textarea" placeholder="Pesan" type="text" name="Message"></textarea>
-                </div>
-                <div class="col-sm-12">
-                  <button class="send">Kirim</button>
+                  <button class="send btn-kirim">Kirim</button>
                 </div>
               </div>
             </form>
@@ -301,5 +302,22 @@
     <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="js/custom.js"></script>
     <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+    <script>
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbyHJH2bLq2tODVvI2WEHTwFkv_hclaPj5uR0rSN5EYMnk4Wt3QwkJxSvCix3RrdRFLTTg/exec'
+      const form = document.forms['muhammadparif Contact FORM']
+      
+      const btnKirim = document.querySelection('.btn-kirim')
+      const btnAlert = document.querySelection('.my-alert')
+      form.addEventListener('submit', e => {
+        e.preventDefault()
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          .then(response => {
+            myAlert.classList.Toggle('d-none')
+            console.log('Success!', response)
+            })
+          .catch(error => console.error('Error!', error.message))
+      })
+    </script>
   </body>
 </html>
